@@ -17,13 +17,19 @@ module.exports = (sequelize, DataTypes) => {
       return this.create({title: title, dueDate: dueDate,completed: false}) //"this is the reference of the todo class itself"
     }
 
-    markAsCompleted(id){//instance method
-      return Todo.update({completed: false},{
-        where : {
-          id
-        }
-      })//"this" is the reference to a instance of class todo
+    static getAllTodos(){
+      return this.findAll({order: [["id","ASC"]] });
     }
+
+    markAsCompleted(id){//instance method
+      return this.update({completed: true})
+      //"this" is the reference to a instance of class todo
+    }
+
+    delete(){
+     return this.destroy();
+    }
+
   }
   Todo.init({
     title: DataTypes.STRING,
