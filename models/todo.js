@@ -17,9 +17,13 @@ module.exports = (sequelize, DataTypes) => {
       return this.create({title: title, dueDate: dueDate,completed: false}) //"this is the reference of the todo class itself"
     }
 
-    static getAllTodos(){
-      return this.findAll({order: [["id","ASC"]] });
+    static getTodos(){
+      return this.findAll();
     }
+
+    // static getAllTodos(){
+    //   return this.findAll({order: [["id","ASC"]] });
+    // }
 
     markAsCompleted(id){//instance method
       return this.update({completed: true})

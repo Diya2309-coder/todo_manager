@@ -2,10 +2,29 @@ const { response, request } = require("express")
 const express = require("express") //express module
 const app = express()//express application
 const { Todo } = require("./models")
+const path = require("path")
 const bodyParser = require('body-parser')
 app.use(bodyParser.json());
+
 // jest.setTimeout(60000);
 
+app.set("view engine","ejs");
+
+
+app.get("/", async(request,response) => {
+    const allTodos = await Todo.getTodos();
+    if(request.accepts("html")){
+        response.render('index', {
+            allTodos
+        });
+    }else{
+        response.json({
+            allTodos
+        })
+    }
+});
+
+app.use(express.static(path.join(__dirname,'public')));
 
 
 app.get("/todos", async (request, response) => { //creating route rout for the express application with simple msg
