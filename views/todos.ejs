@@ -1,42 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
+<div>
+        <h5 class="font-semibold">Overdue</h5>
+        <ul class="list-none">
+            <li class="todo-item">
+                <div class="flex w-fit my-2 px-2 py-1 hover:bg-purple-50 rounded">
+                    <input id="todo-checkbox-1" type="checkbox"
+                        class="w-4 h-4 text-blue-600 bg-gray-600 borde-gray mt-1">
+                    <label for="todo-checkbox-1" class="ml-2  text-gray-600 cursor-pointer normal-case">Have
+                        to pay the electricity bill</label>
+                    <a href="#" class="hidden trash-icon ml-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                            </path>
+                        </svg>
+                    </a>
+                </div>
+            </li>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/style.css">
-    <title>Document</title>
+            <li class="todo-item">
+                <div class="flex w-fit my-2 px-2 py-1 hover:bg-purple-50 rounded">
+                    <input id="todo-checkbox-2" type="checkbox"
+                        class="w-4 h-4 text-blue-600 bg-gray-600 borde-gray mt-1">
+                    <label for="todo-checkbox-2"
+                        class="ml-2  text-gray-600 cursor-pointer normal-case">Recharge mobile phone</label>
+                    <a href="#" class="hidden trash-icon ml-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                            </path>
+                        </svg>
+                    </a>
+                </div>
+            </li>
+        </ul>
+        <h5 class="font-semibold">Due Today</h5>
+        <h5 class="font-semibold">Due Later</h5>
+    </div>
 
-</head>
 
-<body>
-    <%- include('header.ejs') %>
-        <table border="2px solid black" align="center" bgcolor="pink">
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>DueDate</th>
-                <th>Completed</th>
-            </tr>
-            <% for (var i=0; i < allTodos.length; i++) { %>
-                <tr>
-                    <td>
-                        <%= [i+1] %>
-                    </td>
-                    <td>
-                        <%= allTodos[i].title %>
-                    </td>
-                    <td>
-                        <%= allTodos[i].dueDate %>
-                    </td>
-                    <td>
-                        <%= allTodos[i].completed %>
-                    </td>
-                </tr>
-                <% } %>
-        </table>
-<%- include('footer.ejs') %>
-    
-</body>
-</html>
+
+
+
+
+
+
+
+
+
