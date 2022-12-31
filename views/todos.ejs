@@ -1,6 +1,6 @@
 <h5>
     <%= title %>
-        <span class="bg-gray-100 text-gray-800 text-sm font-small mr-2">
+        <span class="bg-gray-100 text-gray-800 text-sm font-small mr-2 px-2.5 rounded dark:bg-gray-200 dark:text-gray-900 justify-center items-center items">
             <%= data.length %>
         </span>
 </h5>
@@ -8,11 +8,11 @@
     <% for( var i=0; i<data.length; i++) {%>
     <li class="todo-item">
         <div class="flex w-fit my-2 px-2 py-1 hover:bg-purple-50 rounded">
-            <input id="todo-checkbox-<%= data[i].id %>" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-600 borde-gray mt-1">
-            <label class="ml-2  text-gray-600 cursor-pointer normal-case">
+            <input id="todo-checkbox-<%= data[i].id %>" type="checkbox" <%= data[i].completed ? "checked" : "" %> onclick="updateTodo(<%= data[i].id %>)" class="w-4 h-4 text-blue-600 bg-gray-600 borde-gray mt-1">
+            <label for="todo-checkbox-<%= data[i].id %>" class="ml-2  text-gray-600 cursor-pointer normal-case">
                 <%= data[i].title %>
             </label>
-            <a href="#" class="hidden trash-icon ml-2">
+            <a href="#" class="hidden trash-icon ml-2" onclick="deleteTodo(<%= data[i].id %>)">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

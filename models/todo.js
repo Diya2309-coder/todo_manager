@@ -44,9 +44,18 @@ module.exports = (sequelize, DataTypes) => {
         },
       });
     }
-    static getTodos() {
-      return this.findAll();
+
+    static async remove(id) {
+      return this.destroy({
+        where: {
+          id,
+        },
+      });
     }
+
+    // static getTodos() {
+    //   return this.findAll();
+    // }
 
     // static getAllTodos(){
     //   return this.findAll({order: [["id","ASC"]] });
