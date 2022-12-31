@@ -3,7 +3,7 @@ const db = require("../models/index");
 const app = require("../app");
 const { describe } = require("sequelize/types/query-types");
 
-// const { sequelize } = require("../models/index");
+// const { sequelize } = require("../models/index")(sequelize);
 let server, agent;
 
 describe("Todo test suite", () => {
