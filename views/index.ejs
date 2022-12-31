@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do Manager</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
     <link rel="stylesheet" href="./css/style.css">
 </head>
 
@@ -14,14 +15,14 @@
     <div class="grid grid-cols-6">
         <div class="col-start-3 col-span-2">
             <%- include('header.ejs') %>
-                <form>
+                <form action="/todos" method="post">
                     <div class="flex gap-2 py-4">
                         <div class="flex-auto">
-                            <input type="text" placeholder="What's next?"
+                            <input type="text" name="title" placeholder="What's next?"
                                 class="border rounded border-gray-300 text-gray-900 w-full p-2 " required />
                         </div>
                         <div class="flex-auto">
-                            <input type="date"
+                            <input type="date" name="dueDate"
                                 class="border rounded border-gray-300 text-gray-900 w-full p-2 leading-4" />
                         </div>
                         <div class="flex-none">
@@ -30,7 +31,9 @@
                         </div>
                     </div>
                 </form>
-                <%- include('todos.ejs') %>  
+                <%- include('todos.ejs', {title:"Overdue", data:overdue}) %> 
+                <%- include('todos.ejs', {title:"Due Today", data:dueToday}) %> 
+                <%- include('todos.ejs', {title:"Due Later", data:dueLater}) %> 
         </div>
     </div>
 </body>
