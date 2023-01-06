@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html> -->
 <html lang="en">
 
 <head>
@@ -11,11 +11,12 @@
     <link rel="stylesheet" href="./css/style.css">
     <script>
        var token = document.querySelector('meta[name="csrf-token"]').getAttribute("content"); 
-        function updateTodo(id){
-            fetch(`/todos/${id}/markAsCompleted` , {
+        function updateTodo(id, completionStatus){
+            fetch(`/todos/${id}` , {
                 method: "put",
-                headers: { "Content-Type": "application/json" },
+                headers: { "Content-types": "application/json" },
                 body: JSON.stringify({
+                    completed: completionStatus,
                     "_csrf": token
                 })
             })
@@ -30,7 +31,7 @@
         function deleteTodo(id){
             fetch(`/todos/${id}` , {
                 method: "delete",
-                headers: { "Content-Type": "application/json" },
+                headers: { "Content-types": "application/json" },
                body: JSON.stringify({
                     "_csrf": token
                 })

@@ -1,7 +1,7 @@
 // const { response , request } = require("express")(request,response)
 const express = require("express"); //express module
 var cookieParser = require("cookie-parser");
-var csrf = require("csurf");
+var csrf = require("tiny-csrf");
 const app = express(); //express application
 const { Todo } = require("./models");
 const path = require("path");
@@ -9,7 +9,7 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser("shh! some secret string"));
-app.use(csrf({ cookie: true }))
+app.use(csrf("this_should_be_32_character_long", ["POST", "PUT", "DELETE"]));
 app.use(express.static(path.join(__dirname, "public")))
 // jest.setTimeout(60000);
 
@@ -21,12 +21,14 @@ app.get("/", async (request, response) => {
   const overdue = await Todo.overdue();
   const dueToday = await Todo.dueToday();
   const dueLater = await Todo.dueLater();
+  const completed = await Todo.completed();
   if (request.accepts("html")) {
     response.render("index", {
       title: "Todo Application",
       overdue,
       dueToday,
       dueLater,
+      completed,
      csrfToken: request.csrfToken(),
     });
   } else {
@@ -34,6 +36,7 @@ app.get("/", async (request, response) => {
       overdue,
       dueToday,
       dueLater,
+      completed,
     });
   }
 });
@@ -81,11 +84,11 @@ app.post("/todos", async (request, response) => {
 });
 
 //PUT http://mytodoapp.com/todos/123/markAsCompleted
-app.put("/todos/:id/markAsCompleted", async (request, response) => {
+app.put("/todos/:id", async (request, response) => {
   console.log("we have to update a todo with ID: ", request.params.id);
   const todo = await Todo.findByPk(request.params.id);
   try {
-    const updatedTodo = await todo.markAsCompleted();
+    const updatedTodo = await todo.setCompletionStatus(request.body.completed);
     console.log(updatedTodo);
     return response.json(updatedTodo);
   } catch (error) {

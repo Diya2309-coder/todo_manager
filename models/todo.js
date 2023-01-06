@@ -45,6 +45,14 @@ module.exports = (sequelize, DataTypes) => {
       });
     }
 
+    static async completed(){
+      return this.findAll({
+        where: {
+         completed: true,
+        },
+      });
+    }
+
     static async remove(id) {
       return this.destroy({
         where: {
@@ -61,9 +69,9 @@ module.exports = (sequelize, DataTypes) => {
     //   return this.findAll({order: [["id","ASC"]] });
     // }
 
-    markAsCompleted(id) {
+   setCompletionStatus(completed) {
       //instance method
-      return this.update({ completed: true });
+      return this.update({ completed });
       //"this" is the reference to a instance of class todo
     }
 
