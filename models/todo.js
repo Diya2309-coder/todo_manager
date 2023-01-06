@@ -67,9 +67,9 @@ module.exports = (sequelize, DataTypes) => {
       //"this" is the reference to a instance of class todo
     }
 
-    delete() {
-      return this.destroy();
-    }
+    // delete() {
+    //   return this.destroy();
+    // }
   }
   Todo.init(
     {

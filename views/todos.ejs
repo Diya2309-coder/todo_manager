@@ -8,7 +8,7 @@
     <% for( var i=0; i<data.length; i++) {%>
     <li class="todo-item">
         <div class="flex w-fit my-2 px-2 py-1 hover:bg-purple-50 rounded">
-            <input id="todo-checkbox-<%= data[i].id %>" type="checkbox" <%= data[i].completed ? "checked" : "" %> onclick="updateTodo(<%= data[i].id %>)" class="w-4 h-4 text-blue-600 bg-gray-600 borde-gray mt-1">
+            <input id="todo-checkbox-<%= data[i].id %>" type="checkbox" <%= data[i].completed ? "checked" : "" %> onclick="updateTodo(<%= data[i].id %>, <%= !data[i].completed %>)" class="w-4 h-4 text-blue-600 bg-gray-600 borde-gray mt-1">
             <label for="todo-checkbox-<%= data[i].id %>" class="ml-2  text-gray-600 cursor-pointer normal-case">
                 <%= data[i].title %>
             </label>

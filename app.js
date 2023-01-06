@@ -1,15 +1,21 @@
 // const { response , request } = require("express")(request,response)
 const express = require("express"); //express module
+var cookieParser = require("cookie-parser");
+var csrf = require("csurf");
 const app = express(); //express application
 const { Todo } = require("./models");
 const path = require("path");
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
-
+app.use(cookieParser("shh! some secret string"));
+app.use(csrf({ cookie: true }))
+app.use(express.static(path.join(__dirname, "public")))
 // jest.setTimeout(60000);
 
+
 app.set("view engine", "ejs");
+
 
 app.get("/", async (request, response) => {
   const overdue = await Todo.overdue();
@@ -21,6 +27,7 @@ app.get("/", async (request, response) => {
       overdue,
       dueToday,
       dueLater,
+     csrfToken: request.csrfToken(),
     });
   } else {
     response.json({
@@ -44,7 +51,6 @@ app.get("/", async (request, response) => {
 //     }
 // });
 
-app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/todos", async (request, response) => {
   //creating route rout for the express application with simple msg
